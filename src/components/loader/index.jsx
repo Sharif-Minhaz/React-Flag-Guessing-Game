@@ -3,16 +3,18 @@ import styles from "./loader.module.css";
 
 const index = () => {
 	return (
-		<section id="page-loader" className={styles.wrapper}>
-			<div className={styles.cardLoader}>
-				<div className={styles.loader}>
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
+		<div className="row">
+			<div id="page-loader" className={styles.wrapper}>
+				<div className={styles.cardLoader}>
+					<div className={styles.loader}>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 };
 
