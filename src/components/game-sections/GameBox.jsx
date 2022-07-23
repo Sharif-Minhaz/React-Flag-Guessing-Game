@@ -5,7 +5,7 @@ import BoxHeader from "./BoxHeader";
 import Flag from "./Flag";
 import OptionBox from "./options";
 import BoxFooter from "./BoxFooter";
-import Modal from "../modal";
+import Modal from "../modal/Modal";
 // utils
 import Flags from "../../utils/flags";
 import resultTexts from "../../utils/result";
@@ -98,7 +98,7 @@ const GameBox = () => {
 	};
 
 	const genFailAnsText = () => {
-		return resultTexts.fail[Math.floor(Math.random() * resultTexts.success.length)];
+		return resultTexts.fail[Math.floor(Math.random() * resultTexts.fail.length)];
 	};
 
 	const handleSelect = (event) => {
@@ -106,7 +106,7 @@ const GameBox = () => {
 	};
 
 	return (
-		<FlagsContext.Provider value={{ randomFlags, currentFlagIndex, correctAns }}>
+		<FlagsContext.Provider value={{ randomFlags, currentFlagIndex, correctAns, points }}>
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -129,7 +129,7 @@ const GameBox = () => {
 							resState={resultText.isCorrect}
 						/>
 					</div>
-					{currentFlagIndex === 9 && <Modal />}
+					{currentFlagIndex === 9 && <Modal handleRestart={handleRestart} />}
 				</>
 			)}
 		</FlagsContext.Provider>

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const ModalBody = () => {
-  return (
+const ModalBody = ({ points, handleRestart }) => {
+	return (
 		<div
 			className="modal fade"
 			id="exampleModal"
@@ -22,7 +22,13 @@ const ModalBody = () => {
 							aria-label="Close"
 						></button>
 					</div>
-					<div className="modal-body text-center py-4" id="res-modal"></div>
+					<div className="modal-body text-center py-4" id="res-modal">
+						{points < 6 ? (
+							<p className="text-danger">Your final points is {points}. Sorry, you lose. 😫😥</p>
+						) : (
+							<p className="text-success">Your final points is {points}. Excellent, you win. 😊🎉🎊</p>
+						)}
+					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
 							Close
@@ -32,7 +38,7 @@ const ModalBody = () => {
 							className="btn btn-primary"
 							data-bs-dismiss="modal"
 							aria-label="Close"
-							
+							onClick={handleRestart}
 						>
 							Retry
 						</button>
@@ -40,9 +46,9 @@ const ModalBody = () => {
 				</div>
 			</div>
 		</div>
-  );
-}
+	);
+};
 
-export default ModalBody
+export default ModalBody;
 
 // onclick="handleRestart();" on retry

@@ -30,6 +30,8 @@ class Flags {
 	getRandomOptions = (currentFlagIndex) => {
 		this._options = [];
 		while (this._options.length < 6) {
+			// let flagName =
+			// if (!this._options.includes(flagName) === false && ) { }
 			this._options.push(
 				this._allFlags[Math.floor(Math.random() * this._allFlags.length)]?.name.common
 			);
