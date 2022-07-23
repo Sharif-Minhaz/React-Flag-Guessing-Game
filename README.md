@@ -1,6 +1,8 @@
 # Getting Started
 
-This project was created with react and react-hooks along with countryapi
+This project was created with react and react-hooks along with countryapi. 
+<br />
+You can checkout the raw javascript version of this game --> https://sharif-minhaz.github.io/Flag-Guessing-Game/
 
 ## Available Scripts
 
