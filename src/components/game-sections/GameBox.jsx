@@ -8,14 +8,14 @@ import BoxFooter from "./BoxFooter";
 import Modal from "../modal";
 // utils
 import Flags from "../../utils/flags";
-import resultText from "../../utils/result";
+import resultTexts from "../../utils/result";
 // contexts
 import FlagsContext from "../../contexts/FlagsContext";
 
 // create instance of Flags
 const flags = new Flags();
 
-function GameBox() {
+const GameBox = () => {
 	// hooks
 	const [isLoading, setIsLoading] = useState(true);
 	const [randomFlags, setRandomFlags] = useState([]);
@@ -24,7 +24,7 @@ function GameBox() {
 	const [currentFlagIndex, setCurrentFlagIndex] = useState(0);
 	const [correctAns, setCorrectAns] = useState("");
 	const [points, setPoints] = useState(0);
-	const [resultText, setResultText] = useState("Take time, Think well");
+	const [resultText, setResultText] = useState({ msg: "Take time, Think well", isCorrect: null });
 	const [disableInput, setDisableInput] = useState(false);
 
 	useEffect(() => {
@@ -57,38 +57,56 @@ function GameBox() {
 	};
 
 	const handleRestart = () => {
+		defaultState();
 		setRandomFlags(flags.getRandomFlags());
 		setCurrentFlagIndex(0);
-		setOptions(flags.getRandomOptions(0));
+		const [options, correctOption] = flags.getRandomOptions(0);
+		setOptions(options);
+		setCorrectAns(correctOption);
 		setPoints(0);
-		setDisableInput(false);
 	};
 
 	const handleCurrentFlagIndex = () => {
-		setDisableInput(false);
 		setCurrentFlagIndex(currentFlagIndex + 1);
+		defaultState();
+	};
+
+	const defaultState = () => {
+		setSelected("--Select country--");
+		setDisableInput(false);
+		setResultText({
+			msg: "Take time, Think well",
+			isCorrect: null,
+		});
 	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setDisableInput(true);
-		if (correctAns === selected) {
+		if (selected === "--Select country--") {
+			return alert("First select a country!");
+		} else if (correctAns === selected) {
 			setPoints(points + 1);
+			setResultText({ msg: genSuccessAnsText(), isCorrect: true });
 		} else {
-			alert("Wrong answer!");
+			setResultText({ msg: genFailAnsText(), isCorrect: false });
 		}
+		setDisableInput(true);
 	};
 
-	const genSuccessAnsText = () => {};
+	const genSuccessAnsText = () => {
+		return resultTexts.success[Math.floor(Math.random() * resultTexts.success.length)];
+	};
 
-	const genFailAnsText = () => {};
+	const genFailAnsText = () => {
+		return resultTexts.fail[Math.floor(Math.random() * resultTexts.success.length)];
+	};
 
 	const handleSelect = (event) => {
 		setSelected(event.target.value);
 	};
 
 	return (
-		<FlagsContext.Provider value={{ randomFlags, currentFlagIndex }}>
+		<FlagsContext.Provider value={{ randomFlags, currentFlagIndex, correctAns }}>
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -107,7 +125,8 @@ function GameBox() {
 						<BoxFooter
 							handleCurrentFlagIndex={handleCurrentFlagIndex}
 							handleRestart={handleRestart}
-							resultText={resultText}
+							resultText={resultText.msg}
+							resState={resultText.isCorrect}
 						/>
 					</div>
 					{currentFlagIndex === 9 && <Modal />}
@@ -115,6 +134,6 @@ function GameBox() {
 			)}
 		</FlagsContext.Provider>
 	);
-}
+};
 
 export default GameBox;

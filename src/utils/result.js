@@ -1,12 +1,12 @@
 const result = {
 	success: [
-		"Wow! amazing",
-		"Amazing! well done",
-		"Awesome!",
-		"Brilliant!",
-		"You beauty :)",
-		"Outstanding!!!",
-		"Fantastic!!",
+		"Wow! amazing, you get +1 point.",
+		"Amazing! well done, you get +1 point.",
+		"Awesome!, you get +1 point.",
+		"Brilliant!, you get +1 point.",
+		"You beauty :), you get +1 point.",
+		"Outstanding!!!, you get +1 point.",
+		"Fantastic!!, you get +1 point.",
 	],
 	fail: ["Wrong answer!!", "Oops, wrong answer", "Incorrect!", "Wrong, take your time"],
 };

@@ -1,13 +1,23 @@
 import React, { useContext } from "react";
 import FlagsContext from "../../contexts/FlagsContext";
 
-const BoxFooter = ({ handleCurrentFlagIndex, handleRestart }) => {
+const BoxFooter = ({ handleCurrentFlagIndex, handleRestart, resultText, resState }) => {
 	const flag = useContext(FlagsContext);
 	return (
 		<div id="details-area" className="d-flex justify-content-between align-items-center p-3">
-			<span className="lead" id="answer">
-				Take time, Think well
-			</span>
+			{resState === true ? (
+				<span className="text-success lead" id="answer">
+					{resultText}
+				</span>
+			) : resState === null ? (
+				<span className="text-dark lead" id="answer">
+					{resultText}
+				</span>
+			) : (
+				<span className="text-danger lead" id="answer">
+					{resultText}. It is {flag.correctAns}
+				</span>
+			)}
 			<div className="d-flex gap-2">
 				<button className="btn btn-info" onClick={handleRestart}>
 					Restart
