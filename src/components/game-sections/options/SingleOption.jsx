@@ -1,7 +1,11 @@
 import React from "react";
 
-const SingleOption = (props) => {
-	return <option value={"something"}>{"something"}</option>;
+const SingleOption = ({ option }) => {
+	return (
+		<option value={option}>
+			{option}
+		</option>
+	);
 };
 
 export default SingleOption;
